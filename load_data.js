@@ -203,7 +203,7 @@ function select_url(keyword, theme){
                 [key1, key2, key] = [key2, key, key1];
                 
                 // https://my.linkpreview.net
-                var api = `http://api.linkpreview.net/?key=${key}&q=${url}`;
+                var api = `https://api.linkpreview.net/?key=${key}&q=${url}`;
 
                 $.ajax({
                     url: api,
