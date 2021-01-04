@@ -15,15 +15,15 @@ h5 {
 }
 
 h1{
-    font-size: 12vmin;
+    font-size: 10vmin;
 }
 
 h3{
-    font-size: 3.5rem;
+    font-size: 5.5vmin;
 }
 
 h5{
-    font-size: 1.8rem;
+    font-size: 2.5vmin;
 }
 
 html,
@@ -48,8 +48,8 @@ section {
 
 select {
     width: 100%;
-    height: 50px;
-    font-size: 1rem;
+    height: 100%;
+    font-size: 1.75vmin;
     font-weight: bold;
     cursor: pointer;
     border-radius: 1;
@@ -212,14 +212,14 @@ li {
 }
 
 .progress {
-    height: 4vmin;
+    height: 3.2vh;
     margin: 0.7vmin;
-    font-size: 1.8vmin;
+    font-size: 1.75vmin;
 }
 
 div.pull-right {
     padding: 0.5vmin 0vmin 0.5vmin 2vmin;
-    font-size: 1.8vmin;
+    font-size: 1.75vmin;
 }
 
 .bg-success {
