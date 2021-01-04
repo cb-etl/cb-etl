@@ -194,7 +194,7 @@ function select_url(keyword, theme){
 
         for (data in subkeyword_data){
 
-            if (keyword == subkeyword_data[data]["keyword"] && url_count < 3){ //restrict to 9 articles(urls) 
+            if (keyword == subkeyword_data[data]["keyword"] && url_count < 6){ //restrict to 6 articles(urls) 
                 url_count += 1;
                 var url = subkeyword_data[data]["url"];
 

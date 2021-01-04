@@ -19,11 +19,11 @@ h1{
 }
 
 h3{
-    font-size: 6vmin;
+    font-size: 3.5rem;
 }
 
 h5{
-    font-size: 3vmin;
+    font-size: 1.8rem;
 }
 
 html,
@@ -49,7 +49,7 @@ section {
 select {
     width: 100%;
     height: 50px;
-    font-size: 2vmin;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
     border-radius: 1;
@@ -122,7 +122,7 @@ ol {
 
 li {
     /* counter-increment: li; */
-    font-size: 2.3vmin;
+    font-size: 1rem;
     list-style-position: inside;
     -webkit-column-break-inside: avoid;
               page-break-inside: avoid;
@@ -214,11 +214,12 @@ li {
 .progress {
     height: 4vmin;
     margin: 0.7vmin;
+    font-size: 1.8vmin;
 }
 
 div.pull-right {
     padding: 0.5vmin 0vmin 0.5vmin 2vmin;
-    font-size: 2vmin;
+    font-size: 1.8vmin;
 }
 
 .bg-success {
