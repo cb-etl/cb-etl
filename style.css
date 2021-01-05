@@ -209,17 +209,18 @@ li {
     text-align: center;
     border-top: 1vmin black double;
     border-bottom: 1vmin black double;
+    margin-top: 2vmin;
 }
 
 .progress {
     height: 3.2vh;
     margin: 0.7vmin;
-    font-size: 1.75vmin;
+    font-size: 3vmin;
 }
 
 div.pull-right {
     padding: 0.5vmin 0vmin 0.5vmin 2vmin;
-    font-size: 1.75vmin;
+    font-size: 3vmin;
 }
 
 .bg-success {
