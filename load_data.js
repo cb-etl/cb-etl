@@ -204,6 +204,7 @@ function select_url(keyword, theme){
                 
                 // https://my.linkpreview.net
                 var api = `https://api.linkpreview.net/?key=${key}&q=${url}`;
+                console.log(api);
 
                 // $.ajax({
                 //     url: api,
