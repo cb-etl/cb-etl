@@ -213,7 +213,7 @@ li {
 }
 
 .progress {
-    height: 5vh;
+    height: 7vmin;
     margin: 0.7vmin;
     font-size: 3vmin;
 }
