@@ -17,10 +17,20 @@ function select_theme(){
         })
     .then(keyword_top50_data => {
         // Change JSON data format
-        keyword_top50_data = keyword_top50_data.map(function(obj){
+        keyword_top50_data = keyword_top50_data.map(function(obj, index){
             // Assign new key 
             obj['text'] = obj['keyword'];
             obj['weight'] = obj['percentage']; 
+
+            if (index < 10){
+                obj['link'] = '#keyword_text';
+                obj['handlers'] = {click: function(){
+                    select_keyword(this);
+                }};
+            } else {
+                obj['link'] = {href: `https://www.google.com/search?q=${obj['keyword']}&tbs=qdr:d2`, target: "_blank"};
+            };    
+
             // obj['weight'] = obj['weight'] * 100
             // Delete old key 
             delete obj['keyword'];
@@ -68,9 +78,10 @@ function select_theme(){
 // Select Keyword -> set keyword, sentiment, subkeyword, url
 function select_keyword(word){
     $("li").removeClass("active");
-    $(word).find('> li').addClass("active");
-    var keyword_span = word.getElementsByTagName("SPAN")[0];
+    // $(word).find('> li').addClass("active");
+    var keyword_span = word.getElementsByTagName("SPAN")[0] || word.getElementsByTagName("a")[0];
     var keyword_selected = keyword_span.innerText || keyword_span.textContent;
+    $(`li:contains(${keyword_selected})`).addClass("active");
     document.getElementById("keyword_text").textContent = `${keyword_selected}`;
     var theme_element = document.getElementById("theme");
     var theme = theme_element.options[theme_element.selectedIndex].value; 
@@ -132,7 +143,8 @@ function select_subkeyword(keyword, theme){
             if (keyword == subkeyword_data[data]["keyword"]){
                 var subkeyword = subkeyword_data[data]["subkeyword"];
                 var weight = subkeyword_data[data]["weight"];
-                cloud_data.push(JSON.parse(`{"text": "${subkeyword}", "weight": ${weight}}`))
+                var href = `https://www.google.com/search?q=${subkeyword}&tbs=qdr:d2`;
+                cloud_data.push(JSON.parse(`{"text": "${subkeyword}", "weight": ${weight}, "link": {"href": "${href}", "target": "_blank"}}`));
             };
         };
 
@@ -216,7 +228,7 @@ function select_url(keyword, theme){
                 //     jsonpCallback: "myJsonMethod",
                 //     success: function(json) {
 
-                //         var card = `<div class="grid-item col-sm-4 sm-4 box">
+                //         var card = `<div class="grid-item col-md-4 md-4 box">
                 //                         <a href="${json["url"]}">
                 //                         <div class="card" >
                 //                             <img src="${json["image"]}" class="card-img-top" alt="${json["title"]}">
@@ -281,7 +293,7 @@ function select_url(keyword, theme){
 
         for (json in json_array){
                 var json = json_array[json];
-                var card = `<div class="grid-item col-sm-4 sm-4 box">
+                var card = `<div class="grid-item col-md-4 md-4 box">
                             <a href="${json["url"]}">
                                 <div class="card" >
                                     <img src="${json["image"]}" class="card-img-top" alt="${json["title"]}">
