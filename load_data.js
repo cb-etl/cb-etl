@@ -102,16 +102,16 @@ function select_sentiment(keyword, theme){
                 var progess_bar = `<h5>相關輿論情緒<br>(社群留言)</h5>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width:${Number((pos/mean*100).toFixed(2))}%">正面</div>
-                                        <div class="pull-right">${Number((pos/mean*100).toFixed(2))}%</div>
+                                        <div class="pull-right align-self-center">${Number((pos/mean*100).toFixed(2))}%</div>
                                     </div>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width:${Number((neu/mean*100).toFixed(2))}%">中立</div>
-                                        <div class="pull-right">${Number((neu/mean*100).toFixed(2))}%</div>
+                                        <div class="pull-right align-self-center">${Number((neu/mean*100).toFixed(2))}%</div>
 
                                     </div>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width:${Number((neg/mean*100).toFixed(2))}%">負面</div>
-                                        <div class="pull-right">${Number((neg/mean*100).toFixed(2))}%</div>
+                                        <div class="pull-right align-self-center">${Number((neg/mean*100).toFixed(2))}%</div>
                                     </div>`
                                     
                 $(".sentiment_progress").append(progess_bar);
