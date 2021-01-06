@@ -85,8 +85,8 @@ border-bottom-width: 1vmin;
     position: absolute;
     top: 1vmin;
     right: 0.3vmin;
-    width: 2rem;
-    height: 5vmin;
+    /* width: 8vmin; */
+    /* height: 5vmin; */
     pointer-events: none;
     /* border: 2px solid #ffffff; */
     margin-right: 1.75vmin;
