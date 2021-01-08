@@ -43,7 +43,8 @@ a {
 /* Custom Start */
 
 section {
-    margin: 3vmin 0;
+    margin-bottom: 10vmin;
+    padding-top: 2vmin;
 }
 
 select {
@@ -195,6 +196,13 @@ li {
     border-left-color: #e0876a;
 }
 
+#keyword {
+    /* border-radius: 1vmin;
+    box-shadow: 0 10px 35px rgba(62, 9, 11, .3); */
+    background-color: #fbfbfd
+
+}
+
 .keyword_subkeyword_leaderboard.rectangle-list li:before{
     background: #e0876a;
 }
@@ -202,15 +210,26 @@ li {
 #keyword_cloud {
     /* width: 100%; */
     height: 50vh;
-    border-radius: 1vmin;
-	box-shadow: 0 10px 35px rgba(62, 9, 11, .3);
 }
 
-.keyword_selected {
-    text-align: center;
-    border-top: 1vmin black double;
-    border-bottom: 1vmin black double;
-    margin-top: 2vmin;
+#subkeyword .col-xl {
+    background-color: #fbfbfd
+}
+
+#subkeyword .keyword_selected_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#subkeyword .keyword_selected {
+    height: 50vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0876a;
+    color: #fff;
 }
 
 .progress {
@@ -242,8 +261,8 @@ div.pull-right {
 #subkeyword_cloud {
     /* width: 100%; */
     height: 50vh;
-    border-radius: 1vmin;
-	box-shadow: 0 10px 35px rgba(62, 9, 11, .3);
+    /* border-radius: 1vmin;
+	box-shadow: 0 10px 35px rgba(62, 9, 11, .3); */
 }
 
 .card {
