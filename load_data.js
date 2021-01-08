@@ -255,8 +255,8 @@ function select_url(keyword, theme){
             {
                 "title": "Jaguar 小改款 F-Type P300 R-Dynamic 試駕｜美型依舊，2.0T動力表現恰到好處！ - Mobile01",
                 "description": "如果外型的美可以用數據表示，那麼F-Type肯定是我認為C/P值最高的一輛車。於上週公佈雙車型定價的小改款F-Type，改以2.0升四缸渦輪增壓與5.0升八缸機械增壓作為首發車型，定價分別是366萬元與486萬元。P300四缸車型與過往六缸車型價格差異不大，倒是八缸低輸出版本P450...(Jaguar 第1頁)",
-                "image": "https://attach.mobile01.com/attach/202101/mobile01-0237c5de51f2ba7ae46199e815a5c4da.jpg",
-                "url": "./image/unknown.jpg"
+                "image": "./image/unknown.jpg",
+                "url": "https://www.mobile01.com/topicdetail.php?f=603\u0026t=6274801"
             },
             {
                 "title": "觀察站／誰讓民進黨丟失了旗幟？ | 聯合新聞網：最懂你的新聞網站",
