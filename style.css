@@ -12,6 +12,7 @@ h4,
 h5 {
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
+    color: #fbfbfb;
 }
 
 h1{
@@ -32,6 +33,7 @@ body {
     margin: 0px;
     padding: 0px;
     overflow-x: hidden;
+    background-color:#273243;
 }
 
 a {
@@ -43,9 +45,33 @@ a {
 /* Custom Start */
 
 section {
-    margin-bottom: 10vmin;
+    padding-bottom: 5vmin;
     padding-top: 2vmin;
 }
+
+
+section#keyword{
+    border-radius: 0% 0% 10% 10%;
+    width: 100%;
+}
+.backgroud_blur {
+    background-color: #e2e2e210;
+    margin: 0 2.5% 0 2.5%;
+    border-radius: 2.5vmin;
+    padding: 3vmin 0 3vmin;
+}
+
+
+section#subkeyword{
+    background-color: #5c6e76;
+    border-radius: 15% 15% 0% 0% ;
+}
+
+
+.title {
+    margin-bottom: 5vmin;
+}
+
 
 select {
     width: 100%;
@@ -54,9 +80,9 @@ select {
     font-weight: bold;
     cursor: pointer;
     border-radius: 1vmin;
-    background-color: #5387a4;
+    background-color: #5c6e76;
     border: none;
-    border-bottom: 2px solid #5387a4;
+    border-bottom: 2px solid #5c6e76;
     color: white;
     padding: 10px;
     padding-right: 38px;
@@ -73,7 +99,7 @@ display: none;
 
 select:hover,
 select:focus {
-color: #5387a4;
+color: #5c6e76;
 background-color: white;
 border-bottom-color: #000000;
 border-bottom-width: 1vmin;
@@ -106,7 +132,7 @@ select:focus ~ .select-icon {
 }
 select:hover ~ .select-icon svg.icon,
 select:focus ~ .select-icon svg.icon {
-  fill: #5387a4;
+  fill: #5c6e76;
 }
 
 
@@ -137,8 +163,8 @@ li {
     padding: .4em .4em .4em .8em;
     *padding: .4em;
     margin: 0 0 0.7vmin 7.5vmin;
-    background: #ddd;
-    color: #444;
+    background: #4254704b;
+    color: #fbfbfb;
     text-decoration: none;
     transition: all .3s ease-out;
 }
@@ -154,7 +180,7 @@ li {
     left: -2.5em;
     top: 50%;
     margin-top: -1em;
-    background: #5387a4;
+    background: #5c6e76;
     height: 2em;
     width: 2em;
     line-height: 2em;
@@ -196,13 +222,6 @@ li {
     border-left-color: #e0876a;
 }
 
-#keyword {
-    /* border-radius: 1vmin;
-    box-shadow: 0 10px 35px rgba(62, 9, 11, .3); */
-    background-color: #fbfbfd
-
-}
-
 .keyword_subkeyword_leaderboard.rectangle-list li:before{
     background: #e0876a;
 }
@@ -212,24 +231,21 @@ li {
     height: 50vh;
 }
 
-#subkeyword .col-xl {
-    background-color: #fbfbfd
+.container-fluid{
+    padding: 0 !important;
 }
 
-#subkeyword .keyword_selected_row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#subkeyword .keyword_selected {
-    height: 50vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#keyword_text {
+    margin-bottom: 8vmin;
     background-color: #e0876a;
-    color: #fff;
+    border-radius: 0 2.5vmin 2.5vmin 0;
+    width: 50%;
+}
+@media (max-width: 1200px) {
+    #keyword_text {
+        width: 100%;
+        border-radius: 2.5vmin;
+    }
 }
 
 .progress {
@@ -265,14 +281,45 @@ div.pull-right {
 	box-shadow: 0 10px 35px rgba(62, 9, 11, .3); */
 }
 
+.sentiment_canvas {
+    height: 40vh;
+    margin-top: 3vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: 100%;
+    position: relative; 
+}
+
 .card {
-    background-color: #fff;
+    background-color: #ad9f9a5b;
     border-radius: 1vmin;
     box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
     color: #4a4a4a;
     display: block;
     margin: 2vmin;
     overflow: hidden;
+    filter: grayscale(80%);
+}
+
+.card:hover {
+    filter: grayscale(0%);
+    background-color: #fbfbfb ;
+}
+
+.card.middle-viewport {
+    filter: grayscale(0%);
+    background-color: #fbfbfb ;
+}
+
+.card-title {
+    color: #000;
+}
+.card-title:hover {
+    color: #c3542f;
 }
 
 .grid-item a {
@@ -286,3 +333,4 @@ a.card-link {
 .grid-item a:hover {
     color: #e0876a;
 }
+

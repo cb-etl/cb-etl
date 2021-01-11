@@ -1,17 +1,54 @@
-window.onload= select_theme();
+var today = new Date();
+var dd_today = String(today.getDate()).padStart(2, '0');
+var dd_yesterday = String(today.getDate() - 1).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = `${yyyy}${mm}${dd_today}`;
+yesterday = `${yyyy}${mm}${dd_yesterday}`;
+
+function doesFileExist(urlToFile) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', urlToFile, false);
+    xhr.send();
+     
+    if (xhr.status == "404") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+var result = doesFileExist(`./json/news_keyword_top50_${today}.json`);
+
+if (result == true) {
+    var data_time = today;
+    console.log('today' , today);
+} else if (doesFileExist(`./json/news_keyword_top50_${yesterday}.json`) == true){
+    var data_time = yesterday;
+    console.log('yesterday' , yesterday);
+} else {
+    var data_time = '20210111';
+    console.log('20210111' , '20210111');
+}
+
 
 var theme = "news" // default theme
 
+window.onload= select_theme();
+
+
 // Select Theme and Set Default Keyword and Sentiment and SubKeyword and URL
 function select_theme(){
+    console.log(data_time);
     //Select theme from theme toggle
     var theme_element = document.getElementById("theme");
     var theme = theme_element.options[theme_element.selectedIndex].value; 
-    console.log(theme)
+    console.log(theme);
 
 
     // Keyword
-    fetch(`./json/${theme}_keyword_top50.json`)
+    fetch(`./json/${theme}_keyword_top50_${data_time}.json`)
     .then(response => {
         return response.json();
         })
@@ -62,7 +99,7 @@ function select_theme(){
             }
             if (data > 0 && data <= 9){
                 var keyword = keyword_top50_data[data]["text"];
-                var keyword_leaderboard_li = `<a href="#keyword_selected" onclick='select_keyword(this)'>
+                var keyword_leaderboard_li = `<a href="#subkeyword" onclick='select_keyword(this)'>
                                                 <li><span>${keyword}</span></li>
                                             </a>`
                 $(".keyword_leaderboard").append(keyword_leaderboard_li);
@@ -98,10 +135,8 @@ function select_keyword(word){
 
 // Sentiment
 function select_sentiment(keyword, theme){
-    console.log("Sentiment")
-    fetch(`./json/${theme}_keyword_sentiment.json`)
+    fetch(`./json/${theme}_keyword_sentiment_${data_time}.json`)
     .then(response => {
-        console.log(response);
         return response.json();
         })
     .then(subkeyword_data => {
@@ -126,20 +161,34 @@ function select_sentiment(keyword, theme){
                             label: '# of Votes',
                             data: [Number((pos/mean*100).toFixed(2)), Number((neu/mean*100).toFixed(2)), Number((neg/mean*100).toFixed(2))],
                             backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
+                                '#9cb383',
+                                '#73a7a3',
+                                '#dda49b',
                             ],
                             borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 99, 132, 1)',
+                                '#8c9c6b50',
+                                '#6f858250',
+                                '#ac5f5350',
                             ],
                             borderWidth: 1
                         }]
                     },
                     options: {
-                        startAngle : Math.PI
+                        startAngle : Math.PI,
+                        responsive: false,
+                        legend: {
+                            labels: {
+                                // This more specific font property overrides the global property
+                                fontColor: 'white',
+                                fontFamily: "'Montserrat', sans-serif",
+                                fontStyle: 'bold'
+                            }
+                        },
+                        scale: {
+                            gridLines: {
+                                color: 'white'
+                            }
+                        }
                     }
                 });
 
@@ -170,7 +219,7 @@ function select_sentiment(keyword, theme){
 
 // SubKeyword
 function select_subkeyword(keyword, theme){
-    fetch(`./json/${theme}_subkeyword.json`)
+    fetch(`./json/${theme}_subkeyword_${data_time}.json`)
     .then(response => {
         return response.json();
         })
@@ -202,12 +251,14 @@ function select_subkeyword(keyword, theme){
             // fontSize: [90,80,70,60,50,45,40,30,20,15,10,5,3],
             colors: [
                 '#e0876a',
+                '#e0876a',
                 '#f4a688',
+                '#f4a688',
+                '#d9ad7c',
+                '#d9ad7c',
+                '#f9ccac',
                 '#f9ccac',
                 '#fbefcc',
-                '#d9ad7c',
-                '#a2836e',
-                '#674d3c'
             ],
             });
         $('#subkeyword_cloud').jQCloud('update', cloud_data);
@@ -226,7 +277,7 @@ var key = "11a60440155ee44551f3ab7b7f7aad18",
 function select_url(keyword, theme){
     console.log(keyword);
 
-    fetch(`./json/${theme}_keyword_url_preview.json`)
+    fetch(`./json/${theme}_keyword_url_preview_${data_time}.json`)
     .then(response => {
         return response.json();
         })
@@ -243,7 +294,7 @@ function select_url(keyword, theme){
 
         for (data in subkeyword_data){
 
-            if (keyword == subkeyword_data[data]["keyword"] && url_count < 12){ //restrict to 12 articles(urls) 
+            if (subkeyword_data[data]["keyword"].startsWith(keyword) && url_count < 12){ //restrict to 12 articles(urls) 
                 url_count += 1;
                 var url = subkeyword_data[data]["url"];
                 var title = subkeyword_data[data]["title"];
@@ -252,7 +303,7 @@ function select_url(keyword, theme){
                 if (image == null){
                     var image = "./image/unknown.jpg"
                 }
-                console.log(url)
+                // console.log(url)
 
 
                 var card = `<div class="grid-item col-md-4 md-4 box">
@@ -418,3 +469,22 @@ function resize_grid(){
         $grid.masonry('layout');
     });
 }
+
+
+var timeout;
+$(window).on("load scroll resize", function() {
+    if (timeout) {
+        clearTimeout(timeout);
+    }
+    timeout = setTimeout(function() {
+        var $window = $(window),
+        hitbox_top = $window.scrollTop() + $window.height() * .4,
+        hitbox_bottom = $window.scrollTop() + $window.height() * .6;
+        $(".card").each(function() {
+        var $element = $(this),
+            element_top = $element.offset().top,
+            element_bottom = $element.offset().top + $element.height();
+        $element.toggleClass("middle-viewport", hitbox_top < element_bottom && hitbox_bottom > element_top);
+        });
+    }, 200);
+    });
