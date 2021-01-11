@@ -175,7 +175,8 @@ function select_sentiment(keyword, theme){
                     },
                     options: {
                         startAngle : Math.PI,
-                        responsive: false,
+                        responsive: true,
+                        maintainAspectRatio: false,
                         legend: {
                             labels: {
                                 // This more specific font property overrides the global property
