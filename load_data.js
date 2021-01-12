@@ -140,7 +140,8 @@ function select_sentiment(keyword, theme){
         return response.json();
         })
     .then(subkeyword_data => {
-        $(".sentiment_progress").empty();
+        $("#sentiment_chart").remove();
+        $(".sentiment_canvas").append('<canvas id="sentiment_chart"></canvas>');
         var ctx = $('#sentiment_chart');
 
         for (data in subkeyword_data){
@@ -177,6 +178,9 @@ function select_sentiment(keyword, theme){
                         startAngle : Math.PI,
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: {
+                            duration: 0
+                        },
                         legend: {
                             labels: {
                                 // This more specific font property overrides the global property
