@@ -1,11 +1,28 @@
 var today = new Date();
 var dd_today = String(today.getDate()).padStart(2, '0');
 var dd_yesterday = String(today.getDate() - 1).padStart(2, '0');
+var dd_before_yesterday = String(today.getDate() - 2).padStart(2, '0');
 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 
+var month = new Array();
+month["01"] = "January";
+month["02"] = "February";
+month["03"] = "March";
+month["04"] = "April";
+month["05"] = "May";
+month["06"] = "June";
+month["07"] = "July";
+month["08"] = "August";
+month["09"] = "September";
+month["10"] = "October";
+month["11"] = "November";
+month["12"] = "December";
+
 today = `${yyyy}${mm}${dd_today}`;
 yesterday = `${yyyy}${mm}${dd_yesterday}`;
+before_yesterday = `${yyyy}${mm}${dd_before_yesterday}`;
+
 
 function doesFileExist(urlToFile) {
     var xhr = new XMLHttpRequest();
@@ -19,33 +36,51 @@ function doesFileExist(urlToFile) {
     }
 }
 
-var result = doesFileExist(`./json/news_keyword_top50_${today}.json`);
 
-if (result == true) {
+if (doesFileExist(`./json/news_keyword_top50_${today}.json`)== true) {
     var data_time = today;
-    console.log('today' , today);
-} else if (doesFileExist(`./json/news_keyword_top50_${yesterday}.json`) == true){
-    var data_time = yesterday;
-    console.log('yesterday' , yesterday);
+    // console.log('today' , today);
+} else if (doesFileExist(`./json/news_keyword_top50_${yesterday}.json`) == true) {
+    var today = yesterday;
+    var yesterday = before_yesterday;
+    var data_time = today;
+    // console.log('yesterday' , yesterday);
 } else {
-    var data_time = '20210111';
-    console.log('20210111' , '20210111');
+    var today  = '20210111';
+    var yesterday = '20210111';
+    var data_time = today;
+    // console.log('20210111' , '20210111');
 }
 
 
 var theme = "news" // default theme
 
-window.onload= select_theme();
+window.onload= select_theme(theme, data_time);
 
 
 // Select Theme and Set Default Keyword and Sentiment and SubKeyword and URL
-function select_theme(){
-    console.log(data_time);
+function select_theme(theme, data_time){
     //Select theme from theme toggle
     var theme_element = document.getElementById("theme");
     var theme = theme_element.options[theme_element.selectedIndex].value; 
     console.log(theme);
 
+    console.log('today' , today);
+    console.log('yesterday' , yesterday);
+    //Select time from time toggle
+    var time_element = document.getElementById("time");
+    var data_time = time_element.options[time_element.selectedIndex].value; 
+    if (data_time == "today") {
+        var data_time = today;
+    } else if (data_time == "yesterday"){
+        var data_time = yesterday;
+    };
+    console.log(data_time);
+    var yyyy = data_time.slice(0, 4);
+    var mm = data_time.slice(4, 6);
+    var dd = data_time.slice(6, 8);
+    document.getElementById("year_text").textContent = `${yyyy}\n \n `;
+    document.getElementById("date_text").textContent = `${month[mm].substring(0, 3)}\n${dd}`;
 
     // Keyword
     fetch(`./json/${theme}_keyword_top50_${data_time}.json`)
@@ -68,7 +103,7 @@ function select_theme(){
             if (index < index_range){
                 obj['link'] = '#keyword_text';
                 obj['handlers'] = {click: function(){
-                    select_keyword(this);
+                    select_keyword(this, data_time);
                 }};
             } else {
                 obj['link'] = {href: `https://www.google.com/search?q=${obj['keyword']}&tbs=qdr:d2`, target: "_blank"};
@@ -87,19 +122,19 @@ function select_theme(){
         for (data in keyword_top50_data){
             if (data == 0){
                 var keyword_selected = keyword_top50_data[data]["text"]; //default keyword
-                var keyword_leaderboard_li = `<a href="#keyword_selected" onclick='select_keyword(this)'>
+                var keyword_leaderboard_li = `<a href="#keyword_selected" onclick='select_keyword(this, data_time)'>
                                                 <li class="top1_keyword active"><span>${keyword_selected}</span></li>
                                             </a>`
                 $(".keyword_leaderboard").append(keyword_leaderboard_li);
 
                 document.getElementById("keyword_text").textContent = `${keyword_selected}`;
-                select_sentiment(keyword_selected, theme);
-                select_subkeyword(keyword_selected, theme);
-                select_url(keyword_selected, theme);
+                select_sentiment(keyword_selected, theme, data_time);
+                select_subkeyword(keyword_selected, theme, data_time);
+                select_url(keyword_selected, theme, data_time);
             }
             if (data > 0 && data <= 9){
                 var keyword = keyword_top50_data[data]["text"];
-                var keyword_leaderboard_li = `<a href="#subkeyword" onclick='select_keyword(this)'>
+                var keyword_leaderboard_li = `<a href="#subkeyword" onclick='select_keyword(this, data_time)'>
                                                 <li><span>${keyword}</span></li>
                                             </a>`
                 $(".keyword_leaderboard").append(keyword_leaderboard_li);
@@ -119,22 +154,26 @@ function select_theme(){
 };
 
 // Select Keyword -> set keyword, sentiment, subkeyword, url
-function select_keyword(word){
+function select_keyword(word, data_time){
     $("li").removeClass("active");
     // $(word).find('> li').addClass("active");
     var keyword_span = word.getElementsByTagName("SPAN")[0] || word.getElementsByTagName("a")[0];
     var keyword_selected = keyword_span.innerText || keyword_span.textContent;
-    $(`li:contains(${keyword_selected})`).addClass("active");
+    // $(`li:contains(${keyword_selected})`).addClass("active"); #not exact match
+    $(`li`).filter(function() {
+        // Matches exact string   
+        return $(this).text() === keyword_selected;
+        }).addClass("active");
     document.getElementById("keyword_text").textContent = `${keyword_selected}`;
     var theme_element = document.getElementById("theme");
     var theme = theme_element.options[theme_element.selectedIndex].value; 
-    select_sentiment(keyword_selected, theme);
-    select_subkeyword(keyword_selected, theme);
-    select_url(keyword_selected, theme);
+    select_sentiment(keyword_selected, theme, data_time);
+    select_subkeyword(keyword_selected, theme, data_time);
+    select_url(keyword_selected, theme, data_time);
 };
 
 // Sentiment
-function select_sentiment(keyword, theme){
+function select_sentiment(keyword, theme, data_time){
     fetch(`./json/${theme}_keyword_sentiment_${data_time}.json`)
     .then(response => {
         return response.json();
@@ -223,7 +262,7 @@ function select_sentiment(keyword, theme){
 
 
 // SubKeyword
-function select_subkeyword(keyword, theme){
+function select_subkeyword(keyword, theme, data_time){
     fetch(`./json/${theme}_subkeyword_${data_time}.json`)
     .then(response => {
         return response.json();
@@ -279,7 +318,7 @@ var key = "11a60440155ee44551f3ab7b7f7aad18",
     key1 = "ad7353749a449d713dfa52264f0a369a",
     key2 = "be16d1e359c20f951efce2cf786fd700";
 
-function select_url(keyword, theme){
+function select_url(keyword, theme, data_time){
     console.log(keyword);
 
     fetch(`./json/${theme}_keyword_url_preview_${data_time}.json`)
@@ -304,9 +343,12 @@ function select_url(keyword, theme){
                 var url = subkeyword_data[data]["url"];
                 var title = subkeyword_data[data]["title"];
                 var description = subkeyword_data[data]["description"];
+                if (description == null){
+                    var description = "";
+                }
                 var image = subkeyword_data[data]["image"];
                 if (image == null){
-                    var image = "./image/unknown.jpg"
+                    var image = "./image/unknown.jpg";
                 }
                 // console.log(url)
 
