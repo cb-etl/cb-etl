@@ -114,6 +114,11 @@ section#subkeyword{
     height: 13.5vmin;
     padding-top: 0.7vmin;
 }
+@media (max-width: 1200px) {
+    #date_text {
+        padding-top: 1.5vmin;
+    }
+}
 
 
 select {
