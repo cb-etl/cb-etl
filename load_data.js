@@ -79,7 +79,7 @@ function select_theme(theme, data_time){
     var yyyy = data_time.slice(0, 4);
     var mm = data_time.slice(4, 6);
     var dd = data_time.slice(6, 8);
-    document.getElementById("year_text").textContent = `${yyyy}\n \n `;
+    document.getElementById("year_text").textContent = `     ${yyyy}\n \n `;
     document.getElementById("date_text").textContent = `${month[mm].substring(0, 3)}\n${dd}`;
 
     // Keyword
