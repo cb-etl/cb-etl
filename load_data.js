@@ -293,16 +293,29 @@ function select_subkeyword(keyword, theme, data_time){
             autoResize: true,
             // shape: "rectangular",
             // fontSize: [90,80,70,60,50,45,40,30,20,15,10,5,3],
+            // colors: [
+            //     '#e0876a',
+            //     '#e0876a',
+            //     '#f4a688',
+            //     '#f4a688',
+            //     '#d9ad7c',
+            //     '#d9ad7c',
+            //     '#f9ccac',
+            //     '#f9ccac',
+            //     '#fbefcc',
+            // ],
             colors: [
-                '#e0876a',
-                '#e0876a',
-                '#f4a688',
-                '#f4a688',
-                '#d9ad7c',
-                '#d9ad7c',
-                '#f9ccac',
-                '#f9ccac',
+                '#FFF5CF',
                 '#fbefcc',
+                '#DBCDAE',
+                '#e9ddae',
+                '#d3caa4',
+                '#c2b786',
+                '#e9d995',
+                '#c9b08d',
+                '#cea789',
+                '#dcac85',
+                '#d9ad7c',
             ],
             });
         $('#subkeyword_cloud').jQCloud('update', cloud_data);
@@ -517,21 +530,21 @@ function resize_grid(){
     });
 }
 
-
-var timeout;
-$(window).on("load scroll resize", function() {
-    if (timeout) {
-        clearTimeout(timeout);
-    }
-    timeout = setTimeout(function() {
-        var $window = $(window),
-        hitbox_top = $window.scrollTop() + $window.height() * .4,
-        hitbox_bottom = $window.scrollTop() + $window.height() * .6;
-        $(".card").each(function() {
-        var $element = $(this),
-            element_top = $element.offset().top,
-            element_bottom = $element.offset().top + $element.height();
-        $element.toggleClass("middle-viewport", hitbox_top < element_bottom && hitbox_bottom > element_top);
-        });
-    }, 200);
-    });
+// 滑動變更Class
+// var timeout;
+// $(window).on("load scroll resize", function() {
+//     if (timeout) {
+//         clearTimeout(timeout);
+//     }
+//     timeout = setTimeout(function() {
+//         var $window = $(window),
+//         hitbox_top = $window.scrollTop() + $window.height() * .4,
+//         hitbox_bottom = $window.scrollTop() + $window.height() * .6;
+//         $(".card").each(function() {
+//         var $element = $(this),
+//             element_top = $element.offset().top,
+//             element_bottom = $element.offset().top + $element.height();
+//         $element.toggleClass("middle-viewport", hitbox_top < element_bottom && hitbox_bottom > element_top);
+//         });
+//     }, 200);
+//     });

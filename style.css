@@ -352,39 +352,38 @@ canvas {
     background-color: #ad9f9a5b;
     border-radius: 1vmin;
     box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
-    color: #4a4a4a;
+    color: #f2f2f2;
     display: block;
     margin: 2vmin;
     overflow: hidden;
-    filter: grayscale(80%);
+    filter: sepia(25%); 
+}
+.grid-item a {
+    color: #cdcdcd;
 }
 
 .card:hover {
-    filter: grayscale(0%);
+    filter: sepia(0%);;
     background-color: #fbfbfb ;
 }
 
-.card.middle-viewport {
-    filter: grayscale(0%);
-    background-color: #fbfbfb ;
-}
-
-.card-title {
-    color: #000;
-}
-.card-title:hover {
+.card:hover .card-title{
     color: #c3542f;
 }
 
-.grid-item a {
-    color: #000;
-}
-
-a.card-link {
+.card:hover a {
     color: #e0876a;
 }
 
-.grid-item a:hover {
-    color: #e0876a;
-}
+/* .card.middle-viewport {
+    filter: sepia(0%);;
+    background-color: #fbfbfb ;
+} */
+
+
+
+
+
+
+
 
