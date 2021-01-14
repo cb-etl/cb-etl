@@ -31,7 +31,7 @@ h3{
 }
 
 h5{
-    font-size: 3.5vmin;
+    font-size: 4.25vmin;
 }
 
 html,
@@ -357,6 +357,7 @@ canvas {
     margin: 2vmin;
     overflow: hidden;
     filter: sepia(25%); 
+    font-size: 2.5vmin;
 }
 .grid-item a {
     color: #cdcdcd;
