@@ -46,8 +46,8 @@ if (doesFileExist(`./json/news_keyword_top50_${today}.json`)== true) {
     var data_time = today;
     // console.log('yesterday' , yesterday);
 } else {
-    var today  = '20210124';
-    var yesterday = '20210123';
+    var today  = '20210129';
+    var yesterday = '20210128';
     var data_time = today;
     // console.log('20210111' , '20210111');
 }
